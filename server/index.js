@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.use("/api/auth",userRoutes)
 
-mongoose.connect( "mongodb+srv://Satvik1769:IRONMAn17@devclan.0dqjiuu.mongodb.net/chat" , {
+mongoose.connect( "mongodb://localhost:27017/" , {
     // useNewUrlParser : true,
     // useUnifiedTopology: true,
 }).then(()=>{
