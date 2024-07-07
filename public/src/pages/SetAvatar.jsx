@@ -7,7 +7,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { setAvatarRoute } from "../utils/APIRoutes";
-export default function setAvatar() {
+
+export default function SetAvatar() {
   const api = `https://api.multiavatar.com/4621515646`;
   const navigate = useNavigate();
   const [avatars, setAvatars] = useState([]);
@@ -21,10 +22,16 @@ export default function setAvatar() {
     theme: "dark",
   };
 
-  useEffect(async () => {
-    if (!localStorage.getItem('chat-app-user'))
-      navigate("/login");
-  }, []);
+  useEffect(() => {
+    const checkUser = async () => {
+      if (!localStorage.getItem('chat-app-user')) {
+        navigate("/login");
+      }
+    };
+  
+    checkUser();
+  }, [navigate]);
+  
 
   const setProfilePicture = async () => {
     if (selectedAvatar === undefined) {
@@ -33,10 +40,12 @@ export default function setAvatar() {
       const user = await JSON.parse(
         localStorage.getItem('chat-app-user')
       );
-
-      const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
+      console.log(avatars[selectedAvatar]);
+      const { data } = await axios.post(`${setAvatarRoute}`, {
         image: avatars[selectedAvatar],
+        id:user._id
       });
+      console.log(user , data);
 
       if (data.isSet) {
         user.isAvatarImageSet = true;

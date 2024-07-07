@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.use("/api/auth",userRoutes)
 
-mongoose.connect( "mongodb://localhost:27017/chat" , {
+mongoose.connect( "mongodb://localhost:27017/" , {
     // useNewUrlParser : true,
     // useUnifiedTopology: true,
 }).then(()=>{
