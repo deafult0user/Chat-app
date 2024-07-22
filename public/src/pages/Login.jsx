@@ -76,6 +76,7 @@ export default function Register() {
             placeholder="Username"
             name="username"
             onChange={(e) => handleChange(e)}
+            // hello
             min="3"
           />
           <input
